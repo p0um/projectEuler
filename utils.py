@@ -1,4 +1,5 @@
-from typing import List
+import math
+from typing import List, Set
 
 
 # -- Primes --
@@ -47,3 +48,24 @@ def prime_sieve(n: int) -> List[int]:
         i += 1
 
     return primes
+
+
+# -- General --
+
+def divisors(n: int) -> Set[int]:
+    """
+    Returns a set containing all the divisors of a number.
+
+    :param n: The number for which we want to find the divisors.
+    :return: A set containing the divisors.
+    """
+    if n == 1:
+        return {1}
+
+    divs = [1, n]
+
+    for i in range(2, math.ceil(math.sqrt(n)) + 1):
+        if n % i == 0:
+            divs.append(i)
+            divs.append(n // i)
+    return set(divs)  # Return as set to remove duplicates.
